@@ -1,0 +1,28 @@
+html {
+    overflow-y: scroll;
+    
+    font-size: 18px;
+    font-family: 'Alata', sans-serif;
+}
+
+body {
+    margin: 8px auto;
+    background-image: url("../data/img/map_bckgrnd.jpg");
+    background-size: auto;
+    background-color: #b3cce6;
+    width: auto;
+    
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    float: left;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 50px;
+    text-align: center
+  }
