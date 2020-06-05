@@ -1,17 +1,20 @@
 html {
     overflow-y: scroll;
-    
+
     font-size: 18px;
     font-family: 'Alata', sans-serif;
 }
 
 body {
     margin: 8px auto;
-    background-image: url("../data/img/map_bckgrnd.jpg");
-    background-size: auto;
+    background-image: url("../data/img/old-pirate-treasure-map-background-dark-grunge-torn-84369974.jpg");
+    background-size: cover;
     background-color: #b3cce6;
     width: auto;
-    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+
 }
 
 img {

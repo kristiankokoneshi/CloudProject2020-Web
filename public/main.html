@@ -35,7 +35,7 @@
       <button onclick="document.getElementById('message').style.display='block'"
         class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i
           class="material-icons" style="font-size:36px;color: antiquewhite">email</i></button>
-  
+
       <div class="w3-dropdown-hover w3-hide-small">
         <button class="w3-button w3-padding-large" title="Notifications"><i class="material-icons"
             style="font-size:36px;color: antiquewhite">notifications</i>
@@ -50,6 +50,9 @@
           class="material-icons" style="font-size:36px;color: antiquewhite">exit_to_app</i></a>
     </div>
   </div>
+
+  <br>
+  <br>
 
    <!-- Page Container -->
    <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
@@ -118,7 +121,7 @@
                         <span onclick="document.getElementById('addComp').style.display='none'"
                           class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
                       </div>
-                  
+
                       <form class="w3-container" action="/home/add" method="post" enctype="multipart/form-data">
                         <div class="w3-section">
                           <label><b>Part make</b></label>
@@ -175,10 +178,10 @@
                     class="w3-button w3-light-grey w3-theme"><i class="material-icons">mode_edit</i> Add
                     component</button></p>
 
-               
+
               </div>
 
-              
+
             </div>
           </div>
         </div>
@@ -188,10 +191,10 @@
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <h6 class="w3-opacity">Components for trade</h6>
         <ul  class="w3-ul w3-card-4">
-          
+
           <li class="w3-display-container">  <span onclick="this.parentElement.style.display='none'"
             class="w3-button w3-transparent w3-display-right">&times;</span></li>
-          
+
         </ul>
         <br>
       </div>
@@ -227,24 +230,24 @@
 
   <div id="editprofile" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-  
+
       <div class="w3-center"><br>
         <span onclick="document.getElementById('editprofile').style.display='none'"
           class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-  
+
       </div>
-  
+
       <form class="w3-container" action="/home/edit" method="post" enctype="multipart/form-data">
         <div class="w3-section">
           <label><b>Username: <%=user._name %> </b></label>
-      
+
           <label><b>Email</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="<%= user._email%>" name="email" >
           <label><b>Profile picture</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="file" name="image" id="img" class="" >
           <label><b>Phone</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="<%= user._phone%>" name="phone">
-         
+
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add to
             Inventory</button>
         </div>
