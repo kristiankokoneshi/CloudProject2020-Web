@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ComponentHub Home</title>
+    <title>Treasure Hunt</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -29,9 +29,7 @@
         href="javascript:void(0);" onclick="openNav()"><i class="material-icons">dehaze</i></a>
       <a href="/home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="material-icons"
           style="font-size:36px;color: antiquewhite">home</i></a><a href="/home"><img src="data/img/TreasureHunt.png"></a></a>
-      <button onclick="document.getElementById('editprofile').style.display='block'"
-        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i
-          class="material-icons" style="font-size:36px;color: antiquewhite">settings</i></button>
+
       <button onclick="document.getElementById('message').style.display='block'"
         class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i
           class="material-icons" style="font-size:36px;color: antiquewhite">email</i></button>
@@ -62,29 +60,18 @@
       <div class="w3-col m3">
 
         <!-- Profile -->
-        <div class="w3-card w3-round w3-white">
-          <div class="w3-container">
-            <h4 class="w3-center"><%=user._name%></h4>
-            <p class="w3-center"><img src="img\<%=user._imagename%> " class="w3-circle" style="height:106px;width:106px"
-                alt="Avatar"></p>
-            <hr>
-            <p><i class="material-icons">my_location</i></i> Unknown</p>
-            <p><i class="material-icons">date_range</i></i>
-              <%var t = user._dateCreated.split(/[T]/);%>
-              <%=t[0]%></p>
-          </div>
-        </div>
+
 
         <!--Search for components--> >
         <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-          <p><a href="/trade" class="w3-button w3-green w3-round w3-xlarge">Start your search!</a>
+          <p><a href="CreateHunt.html" class="w3-button w3-green w3-round w3-xlarge">Create a Hunt!</a>
         </div>
         <br>
 
         <!--Wishlist-->
         <div class="w3-card w3-round w3-white">
           <div class="w3-container w3-padding">
-            <h6 class="w3-opacity">Wishlist</h6>
+            <h6 class="w3-opacity">List of Hunts</h6>
             <div class="w3-container">
               <ul class="w3-ul  w3-hoverable">
                 <li onclick="document.getElementById('wishlist').style.display='block'">Listing 1 </li>
@@ -98,10 +85,10 @@
             <div id="wishlist" class="w3-modal">
                 <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
                   <div class="w3-center"><br>
-                    <h6>[Listing details]</h6>
-                    <p><button onclick="document.getElementById('#').style.display='block'" type="button"
-                        class="w3-button w3-green w3-theme"><i class="material-icons">mode_edit</i> Search for component
-                      </button></p>
+                    <h6>Title of the hunt: </h6>
+                    <h6>Decription of the hunt: </h6>
+                    <h6>List of locations:  </h6>
+
                     <br>
                     <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
                       <button onclick="document.getElementById('wishlist').style.display='none'" type="button"
@@ -111,9 +98,6 @@
                 </div>
               </div>
 
-            <p><button onclick="document.getElementById('addComp').style.display='block'" type="button"
-                class="w3-button w3-light-grey w3-theme"><i class="material-icons">mode_edit</i> Add
-                component</button></p>
 
                 <div id="addComp" class="w3-modal">
                     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
@@ -148,9 +132,6 @@
                         class="w3-button w3-red">Cancel</button>
                     </div>
                   </div>
-
-            <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add to
-              Wishlist</button>
           </div>
         </div>
       </div>
@@ -160,48 +141,7 @@
     </div>
 
     <!-- Middle Column -->
-    <div class="w3-col m7">
 
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Inventory</h6>
-              <div class="w3-container">
-                <ul id="inventory_list" class="w3-ul  w3-hoverable">
-                  <% components.forEach(function(component){ %>
-                  <li> <%=component._model %></li>
-                  <% }); %>
-                </ul>
-
-                <p><button onclick="document.getElementById('addComp').style.display='block'" type="button"
-                    class="w3-button w3-light-grey w3-theme"><i class="material-icons">mode_edit</i> Add
-                    component</button></p>
-
-
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h6 class="w3-opacity">Components for trade</h6>
-        <ul  class="w3-ul w3-card-4">
-
-          <li class="w3-display-container">  <span onclick="this.parentElement.style.display='none'"
-            class="w3-button w3-transparent w3-display-right">&times;</span></li>
-
-        </ul>
-        <br>
-      </div>
-      <br>
-
-      <!-- End Middle Column -->
-    </div>
 
     <!-- Right Column -->
     <div class="w3-col m2">
@@ -237,21 +177,7 @@
 
       </div>
 
-      <form class="w3-container" action="/home/edit" method="post" enctype="multipart/form-data">
-        <div class="w3-section">
-          <label><b>Username: <%=user._name %> </b></label>
 
-          <label><b>Email</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="<%= user._email%>" name="email" >
-          <label><b>Profile picture</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="file" name="image" id="img" class="" >
-          <label><b>Phone</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="<%= user._phone%>" name="phone">
-
-          <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add to
-            Inventory</button>
-        </div>
-        </form>
         <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
           <button onclick="document.getElementById('addComp').style.display='none'" type="button"
             class="w3-button w3-red">Cancel</button>
