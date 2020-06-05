@@ -22,6 +22,17 @@
       }
     </style>
   </head>
+<body>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.14.6/firebase-auth.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-storage.js"></script>
 
   <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -74,16 +85,11 @@
           <div class="w3-container w3-padding">
             <h6 class="w3-opacity">List of Hunts</h6>
             <div class="w3-container">
-              <ul class="w3-ul  w3-hoverable">
-                <li onclick="document.getElementById('wishlist').style.display='block'">Listing 1 </li>
-                <li onclick="document.getElementById('wishlist').style.display='block'">Listing 2 </li>
-                <li onclick="document.getElementById('wishlist').style.display='block'">Listing 3 </li>
-                <li onclick="document.getElementById('wishlist').style.display='block'">Listing 4 </li>
-                <li onclick="document.getElementById('wishlist').style.display='block'">Listing 5 </li>
+              <ul class="w3-ul  w3-hoverable" id="hunt-ul">
               </ul>
             </div>
 
-            <div id="wishlist" class="w3-modal">
+            <div id="hunt-modal" class="w3-modal">
                 <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
                   <div class="w3-center"><br>
                     <h6>Title of the hunt: </h6>
@@ -186,47 +192,6 @@
       </div>
     </div>
   </div>
-
-
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-https://firebase.google.com/docs/web/setup#available-libraries -->
-<!-- Add Firebase products that you want to use -->
-<script src="/__/firebase/7.14.6/firebase-auth.js"></script>
-<script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
-<script src="/__/firebase/7.14.6/firebase-storage.js"></script>
-
-
-<script>
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyA5QZxa0KrS3dPUPG0t_2DhIqJ2abNhMwc",
-  authDomain: "ageless-lamp-278509.firebaseapp.com",
-  databaseURL: "https://ageless-lamp-278509.firebaseio.com",
-  projectId: "ageless-lamp-278509",
-  storageBucket: "ageless-lamp-278509.appspot.com",
-  messagingSenderId: "547568656781",
-  appId: "1:547568656781:web:bccb74778f022bf8595dc4"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-</script>
-
-<script>
-function onLogoutClick(){
-  firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-    window.location.replace("login.html")
-  }).catch(function(error) {
-    // An error happened.
-  });
-}
-
-</script>
-
 </body>
 
 </html>

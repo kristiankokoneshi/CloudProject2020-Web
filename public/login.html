@@ -24,6 +24,21 @@
 
 <body>
 
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.14.6/firebase-auth.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-storage.js"></script>
+  <script src="/js/main.js"></script>
+
+
+
+
   <!-- Index header -->
   <header class="w3-bar w3-black">
    <a href="/"></a><img src="data/img/TreasureHunt.png"></a>
@@ -99,76 +114,7 @@
     </div>
   </div>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-https://firebase.google.com/docs/web/setup#available-libraries -->
-<!-- Add Firebase products that you want to use -->
-<script src="/__/firebase/7.14.6/firebase-auth.js"></script>
-<script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
-<script src="/__/firebase/7.14.6/firebase-storage.js"></script>
-
-
-<script>
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyA5QZxa0KrS3dPUPG0t_2DhIqJ2abNhMwc",
-  authDomain: "ageless-lamp-278509.firebaseapp.com",
-  databaseURL: "https://ageless-lamp-278509.firebaseio.com",
-  projectId: "ageless-lamp-278509",
-  storageBucket: "ageless-lamp-278509.appspot.com",
-  messagingSenderId: "547568656781",
-  appId: "1:547568656781:web:bccb74778f022bf8595dc4"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-</script>
-
-<script>
-
-//Login function
-//Takes info from the fields and then attempts a Firebase Auth login
-function onLoginClick(){
-  var emailField = document.getElementById("email-field")
-  var passwordField = document.getElementById("password-field")
-
-  firebase.auth().signInWithEmailAndPassword(emailField.value, passwordField.value).catch
-
-(function(error){
-    //Handle errors here
-    //Not necessary for now
-  });
-}
-
-//Register function
-//Takes info from the fields and then attempts a Firebase Auth registration
-function onRegisterClick(){
-  var emailField = document.getElementById("register-email-field")
-  var passwordField = document.getElementById("register-password-field")
-
-  firebase.auth().createUserWithEmailAndPassword(emailField.value, passwordField.value).catch(function(error){
-    //Handle errors here
-    //Not necessary for now
-  });
-}
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // Now do things here
-    // Send user to main page
-    window.location.replace("/main.html")
-
-
-  } else {
-    // User is signed out.
-    // User should be redirected to login.html
-
-
-  }
-});
-
-</script>
 
 </body>
 
