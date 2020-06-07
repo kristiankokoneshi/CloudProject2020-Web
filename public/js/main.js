@@ -30,13 +30,26 @@ function onLoginClick(){
 //Register function
 //Takes info from the fields and then attempts a Firebase Auth registration
 function onRegisterClick(){
-  var emailField = document.getElementById("register-email-field")
-  var passwordField = document.getElementById("register-password-field")
+  var emailField = document.getElementById("register-email-field");
+  var passwordField = document.getElementById("register-password-field");
+  var firstnameField = document.getElementById("register-firstname-field");
+  var lastnameField = document.getElementById("register-lastname-field");
 
-  firebase.auth().createUserWithEmailAndPassword(emailField.value, passwordField.value).catch(function(error){
-    //Handle errors here
-    //Not necessary for now
+  var docData = {
+    firstname: firstnameField.value,
+    lastname: lastnameField.value
+  }
+  
+  db.collection("users").doc(emailField.value).set(docData).then(function() {
+    console.log("Document successfully written!");
+    firebase.auth().createUserWithEmailAndPassword(emailField.value, passwordField.value).catch(function(error){
+      //Handle errors here
+      //Not necessary for now
+    });
   });
+
+
+
 }
 
 var huntList;
