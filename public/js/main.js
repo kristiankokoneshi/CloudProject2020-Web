@@ -212,7 +212,9 @@ function createHunt(){
 
   db.collection("hunts").doc(title).set(docData).then(function() {
     console.log("Document successfully written!");
+    window.location.replace("/main.html");
   });
+
 
 
 

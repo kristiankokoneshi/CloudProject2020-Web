@@ -29,14 +29,11 @@
   <div class="wrap">
 
     <h2> Create Hunt</h2>
-    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter title" name="title" id="create-hunt-title"
-      required >
-    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter description" name="description" id="create-hunt-description"
-      required >
-
+    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter title" name="title" id="create-hunt-title" required >
+    <textarea class="w3-input w3-border w3-margin-bottom w3" type="text" placeholder="Enter description" name="description" id="create-hunt-description" required ></textarea>
     <ul id="location-ul"></ul>
-      
-    <input value="Create" onclick="createHunt()">
+    <button onclick="createHunt()" class="w3-button w3-block w3-green w3-section w3-padding" type="button">Create</button>
+
 
   </div>
 </body>
