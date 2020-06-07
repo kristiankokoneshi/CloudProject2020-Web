@@ -1,0 +1,35 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-style{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-item{
+    color: black;
+}
+
+.hunt-table{
+    margin-top: 60px;
+    display: none;
+}
+
+.location-table {
+    margin-top: 60px;
+    display: none;
+}
+
+body {
+    margin: 8px auto;
+    background-image: url("../data/img/light.jpg");
+    background-size: cover;
+    width: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+
+}

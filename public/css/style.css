@@ -7,7 +7,7 @@ html {
 
 body {
     margin: 8px auto;
-    background-image: url("../data/img/old-pirate-treasure-map-background-dark-grunge-torn-84369974.jpg");
+    background-image: url("../data/img/light.jpg");
     background-size: cover;
     background-color: #b3cce6;
     width: auto;
@@ -44,6 +44,11 @@ img {
   text-align: center;
 }
 
+h1{
+
+  text-align: center;
+  color: black;
+  }
 input[type=text] {
   width: 100%;
   box-sizing: border-box;
