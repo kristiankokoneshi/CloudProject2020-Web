@@ -37,7 +37,8 @@ function onRegisterClick(){
 
   var docData = {
     firstname: firstnameField.value,
-    lastname: lastnameField.value
+    lastname: lastnameField.value,
+    admin: false
   }
 
   db.collection("users").doc(emailField.value).set(docData).then(function() {
@@ -54,10 +55,34 @@ function onRegisterClick(){
 
 var huntList;
 var locationList;
+var admin;
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is logged in
+    if(admin == null){
+      console.log("admin was null");
+      var docRef = db.collection("users").doc(user.email);
+
+      docRef.get().then(function(doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          if(doc.data().admin == true){
+            admin == true;
+            // Make admin nav icon visible
+            document.getElementById("admin-nav-button").className = "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white";
+          }
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+    }else if(admin == true){
+      document.getElementById("admin-nav-button").className = "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white";
+    }
+
     if(window.location.pathname == "/login.html"){
       window.location.replace("/main.html")
     }else if (window.location.pathname == "/main.html") {

@@ -2,26 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Treasure Hunt</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-    <style>
-      html,
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: 'Alata', sans-serif;
-      }
-    </style>
-  </head>
+  <meta charset="utf-8">
+  <title>Treasure Hunt</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
+  <style>
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Alata', sans-serif;
+  }
+  </style>
+</head>
 <body>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -37,47 +37,44 @@
 
   <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
-        href="javascript:void(0);" onclick="openNav()"><i class="material-icons">dehaze</i></a>
-      <a href="/home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="material-icons"
-          style="font-size:36px;color: antiquewhite">home</i></a><a href="/home"><img src="data/img/TreasureHunt.png"></a></a>
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()">
+        <i class="material-icons">dehaze</i>
+      </a>
+      <a href="/main.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+        <i class="material-icons" style="font-size:36px;color: black">home</i>
+      </a>
+      <a href="/main.html">
+        <img src="data/img/TreasureHunt.png">
+      </a>
 
-      <button onclick="document.getElementById('message').style.display='block'"
-        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i
-          class="material-icons" style="font-size:36px;color: antiquewhite">email</i></button>
+      <button id="admin-nav-button" onclick="document.getElementById('message').style.display='block'" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-hide" title="Admin">
+        <i class="material-icons" style="font-size:36px;color:black;">lock</i>
+      </button>
 
-      <div class="w3-dropdown-hover w3-hide-small">
-        <button class="w3-button w3-padding-large" title="Notifications"><i class="material-icons"
-            style="font-size:36px;color: antiquewhite">notifications</i>
-          <span class="w3-badge w3-right w3-small w3-green">3</span></button>
-        <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-          <a href="#" class="w3-bar-item w3-button">Hunt favourited</a>
-          <a href="#" class="w3-bar-item w3-button">Someone is on your hunt</a>
-          <a href="#" class="w3-bar-item w3-button">New record</a>
-        </div>
-      </div>
       <button onclick="onLogoutClick()"
-      class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Exit"><i
-          class="material-icons" style="font-size:36px;color: antiquewhite">exit_to_app</i></button>
-    </div>
+      class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Exit">
+        <i class="material-icons" style="font-size:36px;color: black">exit_to_app</i>
+      </button>
+
   </div>
+</div>
 
-  <br>
-  <br>
+<br>
+<br>
 
-   <!-- Page Container -->
-   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
-    <!-- The Grid -->
-    <div class="w3-row">
-      <!-- Left Column -->
-      <div class="w3-col m3">
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
 
-        <!-- Profile -->
+      <!-- Profile -->
 
 
-        <!--Search for components--> >
-        <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-          <p><a href="createhunt.html" class="w3-button w3-green w3-round w3-xlarge">Create a Hunt!</a>
+      <!--Search for components--> >
+      <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+        <p><a href="createhunt.html" class="w3-button w3-green w3-round w3-xlarge">Create a Hunt!</a>
         </div>
         <br>
 
@@ -91,107 +88,107 @@
             </div>
 
             <div id="hunt-modal" class="w3-modal">
-                <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-                  <div class="w3-center"><br>
-                    <h6>Title of the hunt: </h6>
-                    <h6 id="modal-hunt-title"></h6>
-                    <h6>Decription of the hunt: </h6>
-                    <h6 id="modal-hunt-description"></h6>
-                    <h6>List of locations:  </h6>
-                    <ul id="modal-location-ul"></ul>
+              <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                <div class="w3-center"><br>
+                  <h6>Title of the hunt: </h6>
+                  <h6 id="modal-hunt-title"></h6>
+                  <h6>Decription of the hunt: </h6>
+                  <h6 id="modal-hunt-description"></h6>
+                  <h6>List of locations:  </h6>
+                  <ul class="w3-ul  w3-hoverable" id="modal-location-ul"></ul>
 
-                    <br>
-                    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                      <button onclick="document.getElementById('hunt-modal').style.display='none'" type="button"
-                        class="w3-button w3-red">Close</button>
-                    </div>
+                  <br>
+                  <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('hunt-modal').style.display='none'" type="button"
+                    class="w3-button w3-red">Close</button>
                   </div>
                 </div>
               </div>
+            </div>
 
 
-                <div id="addComp" class="w3-modal">
-                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-                      <div class="w3-center"><br>
-                        <span onclick="document.getElementById('addComp').style.display='none'"
-                          class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                      </div>
+            <div id="addComp" class="w3-modal">
+              <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                <div class="w3-center"><br>
+                  <span onclick="document.getElementById('addComp').style.display='none'"
+                  class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                </div>
 
-                      <form class="w3-container" action="/home/add" method="post" enctype="multipart/form-data">
-                        <div class="w3-section">
-                          <label><b>Part make</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter part make" name="partMake"
-                            required>
-                          <label><b>Part model</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter part model" name="partModel"
-                            required>
-                          <label><b>Memory</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter memory" name="memory"
-                            required>
-                          <label><b>Speed</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter speed" name="speed" required>
-                          <label><b>Capacity</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter capacity" name="capacity"
-                            required>
-                          <label><b>Quantity</b></label>
-                          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter quantity" name="quantity"
-                            required>
-                          <button type='submit' class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add
-                            component</button>
-                      </form>
-                      <button onclick="document.getElementById('addComp').style.display='none'" type="button"
-                        class="w3-button w3-red">Cancel</button>
-                    </div>
+                <form class="w3-container" action="/home/add" method="post" enctype="multipart/form-data">
+                  <div class="w3-section">
+                    <label><b>Part make</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter part make" name="partMake"
+                    required>
+                    <label><b>Part model</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter part model" name="partModel"
+                    required>
+                    <label><b>Memory</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter memory" name="memory"
+                    required>
+                    <label><b>Speed</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter speed" name="speed" required>
+                    <label><b>Capacity</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter capacity" name="capacity"
+                    required>
+                    <label><b>Quantity</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter quantity" name="quantity"
+                    required>
+                    <button type='submit' class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add
+                      component</button>
+                    </form>
+                    <button onclick="document.getElementById('addComp').style.display='none'" type="button"
+                    class="w3-button w3-red">Cancel</button>
                   </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+
+          <!-- End Left Column -->
         </div>
+
+        <!-- Middle Column -->
+
+
+        <!-- Right Column -->
+        <div class="w3-col m2">
+
+
+
+          <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
       </div>
 
-
-      <!-- End Left Column -->
+      <!-- End Page Container -->
     </div>
+    <br>
 
-    <!-- Middle Column -->
+    <footer color: antiquewhite; class="center" style="color: antiquewhite">
+      <h2>Find <a href="/about">us</a> on social media:</h2>
+      <i class="fa fa-facebook-official w3-hover-opacity" style="font-size:36px;"></i>
+      <i class="fa fa-instagram w3-hover-opacity" style="font-size:36px;"></i>
+      <i class="fa fa-snapchat w3-hover-opacity" style="font-size:36px;"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity" style="font-size:36px;"></i>
+      <i class="fa fa-twitter w3-hover-opacity" style="font-size:36px;"></i>
+      <i class="fa fa-linkedin w3-hover-opacity" style="font-size:36px;"></i>
+    </footer>
 
+    <div id="editprofile" class="w3-modal">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
-    <!-- Right Column -->
-    <div class="w3-col m2">
-
-
-
-      <!-- End Right Column -->
-    </div>
-
-    <!-- End Grid -->
-  </div>
-
-  <!-- End Page Container -->
-  </div>
-  <br>
-
-  <footer color: antiquewhite; class="center" style="color: antiquewhite">
-    <h2>Find <a href="/about">us</a> on social media:</h2>
-    <i class="fa fa-facebook-official w3-hover-opacity" style="font-size:36px;"></i>
-    <i class="fa fa-instagram w3-hover-opacity" style="font-size:36px;"></i>
-    <i class="fa fa-snapchat w3-hover-opacity" style="font-size:36px;"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity" style="font-size:36px;"></i>
-    <i class="fa fa-twitter w3-hover-opacity" style="font-size:36px;"></i>
-    <i class="fa fa-linkedin w3-hover-opacity" style="font-size:36px;"></i>
-  </footer>
-
-  <div id="editprofile" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-      <div class="w3-center"><br>
-        <span onclick="document.getElementById('editprofile').style.display='none'"
+        <div class="w3-center"><br>
+          <span onclick="document.getElementById('editprofile').style.display='none'"
           class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
 
-      </div>
+        </div>
 
 
         <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
           <button onclick="document.getElementById('addComp').style.display='none'" type="button"
-            class="w3-button w3-red">Cancel</button>
+          class="w3-button w3-red">Cancel</button>
         </div>
       </div>
     </div>
