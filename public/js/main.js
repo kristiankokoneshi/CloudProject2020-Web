@@ -39,7 +39,7 @@ function onRegisterClick(){
     firstname: firstnameField.value,
     lastname: lastnameField.value
   }
-  
+
   db.collection("users").doc(emailField.value).set(docData).then(function() {
     console.log("Document successfully written!");
     firebase.auth().createUserWithEmailAndPassword(emailField.value, passwordField.value).catch(function(error){
@@ -168,6 +168,7 @@ function displayHunt(huntTitle){
       document.getElementById("modal-hunt-title").innerHTML = item.title;
       document.getElementById("modal-hunt-description").innerHTML = item.description;
       var locationUl = document.getElementById("modal-location-ul");
+      locationUl.innerHTML = "";
 
 
       item.locations.forEach(function(item2, i2){
@@ -240,4 +241,11 @@ function onLogoutClick(){
   }).catch(function(error) {
     // An error happened.
   });
+}
+
+
+
+
+function deleteLocation(){
+
 }
