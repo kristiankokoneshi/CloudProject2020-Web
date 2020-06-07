@@ -12,23 +12,33 @@
     <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
   </head>
 
+
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
 
-<div class="wrap">
-
-  <h2> Create Hunt</h2>
-  <form>
-<input type="text" placeholder="Title " required>
-<input type="text" placeholder="Decription " required>
- <ul data-empty-message="You have no unread messages"></ul>
-<input type="submit" value="Submit" onclick="">
-
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.14.6/firebase-auth.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-storage.js"></script>
+  <script src="/js/main.js"></script>
 
 
-  </from>
+  <div class="wrap">
 
-</div>
+    <h2> Create Hunt</h2>
+    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter title" name="title" id="create-hunt-title"
+      required >
+    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter description" name="description" id="create-hunt-description"
+      required >
 
+    <ul id="location-ul"></ul>
+      
+    <input value="Create" onclick="createHunt()">
+
+  </div>
 </body>
 
 </html>
