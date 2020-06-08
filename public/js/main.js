@@ -48,9 +48,6 @@ function onRegisterClick(){
       //Not necessary for now
     });
   });
-
-
-
 }
 
 var huntList;
@@ -96,12 +93,12 @@ firebase.auth().onAuthStateChanged(function(user) {
       // Setting up map
       mymap = L.map('map').setView([56.031, 14.152], 13);
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 18,
-          id: 'mapbox/streets-v11',
-          tileSize: 512,
-          zoomOffset: -1,
-          accessToken: 'pk.eyJ1IjoibWFydGlqbjE1MiIsImEiOiJja2I2OWtqdGIwNXh3MnlvYjNuc2FldnpyIn0.a7BqJmGsQoUB0OOP0ZbESg'
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoibWFydGlqbjE1MiIsImEiOiJja2I2OWtqdGIwNXh3MnlvYjNuc2FldnpyIn0.a7BqJmGsQoUB0OOP0ZbESg'
       }).addTo(mymap);
 
       // On main page we want to load the main page elements (such as hunt list)
@@ -185,8 +182,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         console.log("Error getting documents: ", error);
       });
     }else if (window.location.pathname == "/admin.html") {
-
-
       db.collection("hunts")
       .get()
       .then(function(querySnapshot) {
@@ -382,7 +377,7 @@ function openFirstTable() {
     tableRow.appendChild(itemDescription);
 
     var itemLocations = document.createElement("td");
-    itemLocations.innerHTML = item.locations.size;
+    itemLocations.innerHTML = item.locations.length;
     tableRow.appendChild(itemLocations);
 
     var itemOwner = document.createElement("td");
@@ -391,14 +386,14 @@ function openFirstTable() {
 
     var updateButton = document.createElement("button");
     updateButton.innerHTML = "Update";
-    updateButton.onclick = console.log("Update button was clicked for " + item.title);
+    updateButton.onclick = function() { displayUpdateHunt(item); };
     var updateButtonTd = document.createElement("td");
     updateButtonTd.appendChild(updateButton);
     tableRow.appendChild(updateButtonTd);
 
     var deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
-    updateButton.onclick = console.log("Delete button was clicked for " + item.title);
+    deleteButton.onclick = function() { displayDeleteHunt(item); };
     var deleteButtonTd = document.createElement("td");
     deleteButtonTd.appendChild(deleteButton);
     tableRow.appendChild(deleteButtonTd);
@@ -451,7 +446,7 @@ function openSecondTable() {
 
     var deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
-    updateButton.onclick = console.log("Delete button was clicked for " + item.title);
+    deleteButton.onclick = console.log("Delete button was clicked for " + item.title);
     var deleteButtonTd = document.createElement("td");
     deleteButtonTd.appendChild(deleteButton);
     tableRow.appendChild(deleteButtonTd);
@@ -461,6 +456,126 @@ function openSecondTable() {
 }
 
 
-function deleteLocation(){
+function displayUpdateHunt(hunt){
+  // Get the modal
+  var modal = document.getElementById("update-hunt-modal");
+  modal.style.display = "block";
 
+  // Now populate the modal with the hunt information
+  var updateHuntTitle = document.getElementById("update-hunt-title");
+  updateHuntTitle.value = hunt.title;
+
+  var updateHuntDescription = document.getElementById("update-hunt-description");
+  updateHuntDescription.value = hunt.description;
+
+  var updateHuntButton = document.getElementById("update-hunt-button");
+  updateHuntButton.onclick = function() { performHuntUpdate(hunt.title); };
+
+
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  var locationUl = document.getElementById("modal-location-ul");
+  locationUl.innerHTML = "";
+
+  hunt.locations.forEach(function(item, i){
+    item
+    .get()
+    .then(function(doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        var locationLi = document.createElement("li");
+        locationLi.appendChild(document.createTextNode(doc.id));
+        locationUl.appendChild(locationLi);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    });
+  });
+}
+
+function performHuntUpdate(title){
+  // Now populate the modal with the hunt information
+  var updateHuntTitle = document.getElementById("update-hunt-title");
+  var updateHuntDescription = document.getElementById("update-hunt-description");
+
+
+  var huntRef = db.collection("hunts").doc(title);
+  huntRef.update({
+    description: updateHuntDescription.value
+  }).then(function() {
+    console.log("Document successfully updated!");
+    window.location.reload();
+    return false;
+  })
+  .catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating document: ", error);
+  });
+}
+
+
+function displayDeleteHunt(hunt){
+  // Get the modal
+  var modal = document.getElementById("delete-hunt-modal");
+  modal.style.display = "block";
+
+  // Now populate the modal with the hunt information
+  var updateHuntTitle = document.getElementById("delete-hunt-title");
+  updateHuntTitle.innerHTML = hunt.title;
+
+  var updateHuntDescription = document.getElementById("delete-hunt-description");
+  updateHuntDescription.innerHTML = hunt.description;
+
+  var updateHuntButton = document.getElementById("delete-hunt-button");
+  updateHuntButton.onclick = function() { performHuntDelete(hunt.title); };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  var locationUl = document.getElementById("delete-modal-location-ul");
+  locationUl.innerHTML = "";
+
+  hunt.locations.forEach(function(item, i){
+    item
+    .get()
+    .then(function(doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        var locationLi = document.createElement("li");
+        locationLi.appendChild(document.createTextNode(doc.id));
+        locationUl.appendChild(locationLi);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    });
+  });
+}
+
+function performHuntDelete(title){
+  var huntRef = db.collection("hunts").doc(title);
+  huntRef.delete().then(function() {
+    console.log("Document successfully deleted!");
+    window.location.reload();
+    return false;
+  })
+  .catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error deleting document: ", error);
+  });
 }
