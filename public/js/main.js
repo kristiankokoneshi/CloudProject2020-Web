@@ -56,6 +56,9 @@ function onRegisterClick(){
 var huntList;
 var locationList;
 var admin;
+var mymap;
+var layerGroup = L.layerGroup();
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -86,6 +89,17 @@ firebase.auth().onAuthStateChanged(function(user) {
     if(window.location.pathname == "/login.html"){
       window.location.replace("/main.html")
     }else if (window.location.pathname == "/main.html") {
+
+      // Setting up map
+      mymap = L.map('map').setView([56.031, 14.152], 13);
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: 'pk.eyJ1IjoibWFydGlqbjE1MiIsImEiOiJja2I2OWtqdGIwNXh3MnlvYjNuc2FldnpyIn0.a7BqJmGsQoUB0OOP0ZbESg'
+      }).addTo(mymap);
 
       // On main page we want to load the main page elements (such as hunt list)
       var huntUl = document.getElementById("hunt-ul");
@@ -187,14 +201,15 @@ function displayHunt(huntTitle){
     console.log("item has title " + item.title);
     console.log("huntTitle is " + huntTitle);
     if(item.title == huntTitle){
-      var huntModal = document.getElementById("hunt-modal");
-      huntModal.style.display='block';
+      //var huntModal = document.getElementById("hunt-modal");
+      //huntModal.style.display='block';
       // Set modal elements to display the right information
       document.getElementById("modal-hunt-title").innerHTML = item.title;
       document.getElementById("modal-hunt-description").innerHTML = item.description;
       var locationUl = document.getElementById("modal-location-ul");
       locationUl.innerHTML = "";
 
+      layerGroup.clearLayers();
 
       item.locations.forEach(function(item2, i2){
         item2
@@ -205,6 +220,14 @@ function displayHunt(huntTitle){
             var locationLi = document.createElement("li");
             locationLi.appendChild(document.createTextNode(doc.id));
             locationUl.appendChild(locationLi);
+            // Add marker to the map
+            var latitude = doc.data().location.latitude;
+            var longitude = doc.data().location.longitude;
+            var marker = L.marker([latitude, longitude]).addTo(layerGroup);
+            marker.bindPopup(doc.id);
+
+
+
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -213,6 +236,8 @@ function displayHunt(huntTitle){
           console.log("Error getting document:", error);
         });
       });
+
+      mymap.addLayer(layerGroup);
     }
   });
 }
