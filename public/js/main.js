@@ -12,6 +12,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+var storage = firebase.storage();
 
 //Login function
 //Takes info from the fields and then attempts a Firebase Auth login
@@ -71,7 +72,6 @@ firebase.auth().onAuthStateChanged(function(user) {
             admin == true;
             // Make admin nav icon visible
             document.getElementById("admin-nav-button").className = "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white";
-
           }else if (doc.data().admin == false && window.location.pathname == "/admin.html") {
             window.location.replace("/main.html")
           }
@@ -255,6 +255,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 // Displays a modal that shows information on the selected hunt
 function displayHunt(huntTitle){
   //huntTitle = huntTitle.value;
+  document.getElementById("hunt-div").className = "w3-col m3 w3-padding"
+
   console.log("displayHunt was called");
   huntList.forEach(function(item, i){
     console.log("checking item: " + item);
@@ -433,9 +435,12 @@ function openSecondTable() {
     itemOwner.innerHTML = item.owner;
     tableRow.appendChild(itemOwner);
 
-    var itemPhoto = document.createElement("td");
-    itemPhoto.innerHTML = item.photo;
-    tableRow.appendChild(itemPhoto);
+    var viewButton = document.createElement("button");
+    viewButton.innerHTML = "View Photo";
+    viewButton.onclick = function() { displayPhotoLocation(item); };
+    var viewButtonTd = document.createElement("td");
+    viewButtonTd.appendChild(viewButton);
+    tableRow.appendChild(viewButtonTd);
 
     var updateButton = document.createElement("button");
     updateButton.innerHTML = "Update";
@@ -636,6 +641,33 @@ function displayDeleteLocation(location){
   // Get the modal
   var modal = document.getElementById("delete-location-modal");
   modal.style.display = "block";
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+function displayPhotoLocation(location){
+  // Get the modal
+  var modal = document.getElementById("photo-location-modal");
+  modal.style.display = "block";
+
+  var gsReference = storage.refFromURL(location.photo);
+
+  gsReference.getDownloadURL().then(function(url) {
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // Or inserted into an <img> element:
+    var img = document.getElementById('photo-img');
+    img.src = url;
+  }).catch(function(error) {
+    // Handle any errors
+  });
+
+  document.getElementById("view-location-modal-title").innerHTML = location.title;
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
