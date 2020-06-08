@@ -1,4 +1,18 @@
+html {
+    overflow-y: scroll;
+
+    font-size: 18px;
+    font-family: 'Alata', sans-serif;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    float: left;
+}
+
 .title {
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     align-items: center;

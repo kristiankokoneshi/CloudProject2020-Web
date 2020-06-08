@@ -439,14 +439,14 @@ function openSecondTable() {
 
     var updateButton = document.createElement("button");
     updateButton.innerHTML = "Update";
-    updateButton.onclick = console.log("Update button was clicked for " + item.title);
+    updateButton.onclick = function() { displayUpdateLocation(item); };
     var updateButtonTd = document.createElement("td");
     updateButtonTd.appendChild(updateButton);
     tableRow.appendChild(updateButtonTd);
 
     var deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
-    deleteButton.onclick = console.log("Delete button was clicked for " + item.title);
+    deleteButton.onclick = function() { displayDeleteLocation(item); };
     var deleteButtonTd = document.createElement("td");
     deleteButtonTd.appendChild(deleteButton);
     tableRow.appendChild(deleteButtonTd);
@@ -578,4 +578,69 @@ function performHuntDelete(title){
     // The document probably doesn't exist.
     console.error("Error deleting document: ", error);
   });
+}
+
+
+function displayUpdateLocation(location){
+  // Get the modal
+  var modal = document.getElementById("update-location-modal");
+  modal.style.display = "block";
+
+  // Now populate the modal with the hunt information
+  var updateHuntTitle = document.getElementById("update-location-title");
+  updateHuntTitle.value = location.title;
+
+  var updateHuntDescription = document.getElementById("update-location-description");
+  updateHuntDescription.value = location.description;
+
+  var updateLocationLatitude = document.getElementById("update-location-latitude");
+  updateLocationLatitude.value = location.location.latitude;
+  var updateLocationLongitude = document.getElementById("update-location-longitude");
+  updateLocationLongitude.value = location.location.longitude;
+
+  var updateHuntButton = document.getElementById("update-location-button");
+  updateHuntButton.onclick = function() { performLocationUpdate(location.title); };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+function performLocationUpdate(title){
+  // Now populate the modal with the hunt information
+  var updateHuntTitle = document.getElementById("update-location-title");
+  var updateHuntDescription = document.getElementById("update-location-description");
+  var updateLocationLatitude = document.getElementById("update-location-latitude");
+  var updateLocationLongitude = document.getElementById("update-location-longitude");
+
+  var huntRef = db.collection("locations").doc(title);
+  huntRef.update({
+    description: updateHuntDescription.value
+    ,location: new firebase.firestore.GeoPoint(parseFloat(updateLocationLatitude.value), parseFloat(updateLocationLongitude.value))
+  }).then(function() {
+    console.log("Document successfully updated!");
+    window.location.reload();
+    return false;
+  })
+  .catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating document: ", error);
+  });
+}
+
+
+function displayDeleteLocation(location){
+  // Get the modal
+  var modal = document.getElementById("delete-location-modal");
+  modal.style.display = "block";
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 }
