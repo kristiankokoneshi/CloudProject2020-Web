@@ -74,6 +74,9 @@ firebase.auth().onAuthStateChanged(function(user) {
             admin == true;
             // Make admin nav icon visible
             document.getElementById("admin-nav-button").className = "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white";
+
+          }else if (doc.data().admin == false && window.location.pathname == "/admin.html") {
+            window.location.replace("/main.html")
           }
         } else {
           // doc.data() will be undefined in this case
@@ -181,6 +184,68 @@ firebase.auth().onAuthStateChanged(function(user) {
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
+    }else if (window.location.pathname == "/admin.html") {
+
+
+      db.collection("hunts")
+      .get()
+      .then(function(querySnapshot) {
+        huntList = [querySnapshot.size];
+        var i = 0;
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+
+          // Create a hunt using the document database
+          // Then add that to the list
+
+          var hunt = {
+            title: doc.id,
+            description: doc.data().description,
+            locations: doc.data().locations,
+            owner: doc.data().owner
+          }
+
+          huntList[i] = hunt;
+          i++;
+
+        });
+        openFirstTable();
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      });
+
+      db.collection("locations")
+      .get()
+      .then(function(querySnapshot) {
+        locationList = [querySnapshot.size];
+        var i = 0;
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+
+          // Create a hunt using the document database
+          // Then add that to the list
+
+          var location = {
+            title: doc.id,
+            description: doc.data().description,
+            location: doc.data().location,
+            owner: doc.data().owner,
+            photo: doc.data().photo
+          }
+
+          locationList[i] = location;
+          i++;
+
+        });
+        openFirstTable();
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      });
+
     }
   } else {
     // User is signed out.
@@ -293,7 +358,107 @@ function onLogoutClick(){
   });
 }
 
+function openFirstTable() {
+  var firstTable = document.getElementById("firstTable");
+  var secondTable = document.getElementById("secondTable");
+  firstTable.style.display = "block";
+  secondTable.style.display="none";
 
+  var firstTableBody = document.getElementById("first-table-body");
+  var secondTableBody = document.getElementById("second-table-body");
+  firstTableBody.innerHTML = "";
+  secondTableBody.innerHTML = "";
+
+
+  huntList.forEach(function(item, i){
+    var tableRow = document.createElement("tr");
+
+    var itemTitle = document.createElement("td");
+    itemTitle.innerHTML = item.title;
+    tableRow.appendChild(itemTitle);
+
+    var itemDescription = document.createElement("td");
+    itemDescription.innerHTML = item.description;
+    tableRow.appendChild(itemDescription);
+
+    var itemLocations = document.createElement("td");
+    itemLocations.innerHTML = item.locations.size;
+    tableRow.appendChild(itemLocations);
+
+    var itemOwner = document.createElement("td");
+    itemOwner.innerHTML = item.owner;
+    tableRow.appendChild(itemOwner);
+
+    var updateButton = document.createElement("button");
+    updateButton.innerHTML = "Update";
+    updateButton.onclick = console.log("Update button was clicked for " + item.title);
+    var updateButtonTd = document.createElement("td");
+    updateButtonTd.appendChild(updateButton);
+    tableRow.appendChild(updateButtonTd);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    updateButton.onclick = console.log("Delete button was clicked for " + item.title);
+    var deleteButtonTd = document.createElement("td");
+    deleteButtonTd.appendChild(deleteButton);
+    tableRow.appendChild(deleteButtonTd);
+
+    firstTableBody.appendChild(tableRow);
+
+  });
+}
+
+function openSecondTable() {
+  var firstTable = document.getElementById("firstTable");
+  var secondTable = document.getElementById("secondTable");
+  firstTable.style.display = "none";
+  secondTable.style.display="block";
+
+  var firstTableBody = document.getElementById("first-table-body");
+  var secondTableBody = document.getElementById("second-table-body");
+  firstTableBody.innerHTML = "";
+  secondTableBody.innerHTML = "";
+
+  locationList.forEach(function(item, i){
+    var tableRow = document.createElement("tr");
+
+    var itemTitle = document.createElement("td");
+    itemTitle.innerHTML = item.title;
+    tableRow.appendChild(itemTitle);
+
+    var itemDescription = document.createElement("td");
+    itemDescription.innerHTML = item.description;
+    tableRow.appendChild(itemDescription);
+
+    var itemLocation = document.createElement("td");
+    itemLocation.innerHTML = "Lat: " + item.location.latitude + " Long: " + item.location.longitude;
+    tableRow.appendChild(itemLocation);
+
+    var itemOwner = document.createElement("td");
+    itemOwner.innerHTML = item.owner;
+    tableRow.appendChild(itemOwner);
+
+    var itemPhoto = document.createElement("td");
+    itemPhoto.innerHTML = item.photo;
+    tableRow.appendChild(itemPhoto);
+
+    var updateButton = document.createElement("button");
+    updateButton.innerHTML = "Update";
+    updateButton.onclick = console.log("Update button was clicked for " + item.title);
+    var updateButtonTd = document.createElement("td");
+    updateButtonTd.appendChild(updateButton);
+    tableRow.appendChild(updateButtonTd);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    updateButton.onclick = console.log("Delete button was clicked for " + item.title);
+    var deleteButtonTd = document.createElement("td");
+    deleteButtonTd.appendChild(deleteButton);
+    tableRow.appendChild(deleteButtonTd);
+
+    secondTableBody.appendChild(tableRow);
+  });
+}
 
 
 function deleteLocation(){

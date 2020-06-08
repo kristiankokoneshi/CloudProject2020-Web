@@ -8,9 +8,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+          <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 </head>
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.14.6/firebase-auth.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.14.6/firebase-storage.js"></script>
+  <script src="/js/main.js"></script>
+
+
+
+
 
 <div class="container">
     <h3 class="title">Administrator</h3>
@@ -27,36 +42,45 @@
         </div>
     </div>
 
-    <!--    Table for Hunt's titles-->
+    <!--    Table for hunts-->
     <div id="firstTable" class="hunt-table">
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-light">
+
             <thead>
             <tr>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Locations</th>
+                <th>Owner</th>
             </tr>
             </thead>
 
-            <tbody>
-            <tr></tr>
+            <tbody id="first-table-body">
+            <tr>
+
+            </tr>
             </tbody>
 
         </table>
     </div>
 
-    <!--    Tables for Locations title-->
+    <!--    Tables for Locations-->
     <div id="secondTable" class="location-table">
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-light">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Locations</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Owner</th>
+                <th>Photo</th>
             </tr>
             </thead>
 
-            <tbody>
-            <tr></tr>
+            <tbody id="second-table-body">
+            <tr>
+
+            </tr>
             </tbody>
 
         </table>
@@ -74,26 +98,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
-
-<script>
-
-    var firstTable = document.getElementById("firstTable");
-    var secondTable = document.getElementById("secondTable");
-
-    function openFirstTable(e) {
-        firstTable.style.display = "block";
-        secondTable.style.display="none";
-    }
-
-    function openSecondTable(e) {
-        console.log(e)
-
-        firstTable.style.display = "none";
-        secondTable.style.display="block";
-    }
-
-</script>
 
 </body>
 </html>
